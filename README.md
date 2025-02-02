@@ -18,9 +18,14 @@
 - 00:08 - npm, package.json, bundler.
 - 01:05 - Igniting the app.
 
-## EP-03
+## EP-03 - Laying the foundation
 
-- Lecture three
+- 00:11 - React element.
+
+## EP-04 - Talk is Cheap, show me the code
+
+- 00:03 - App overview
+- 00:05 - App planning
 
 # Questions
 
@@ -48,6 +53,9 @@
 - We should avoid using cdn and install it as a dependency.
 - Loading images is a costly work.
 - To make the application older browser compatible, use browserslist package. Refer: https://browserslist.dev/
+- npx command is used to exectute a package.
+- React element is an object created using React.createElement(). When this element is rendered on DOM then it become HTML.
+- UI that changes based on data from API those UI is called 'Config Driven UI'.
 -
 
 ## npm init
@@ -65,7 +73,7 @@
 - Some of the popular bundlers are: webpack, parcel, vite etc.
 - node_modules are exempted from code bundling.
 
-## Parcel
+### Parcel
 
 - Parcel is a bundler and getting popular day by day.
 - To install it to the application execute: npm i -D parcel.
@@ -82,6 +90,7 @@
 - Differential bundling - Supports the application for different old and new browsers.
 - Has support of https hence ssl testing can be done.
 - Tree shaking algorithm - Remove unused code in bundling.
+- It uses babel behind the scene to transpile the code.
 
 ## .gitignore
 
@@ -95,4 +104,60 @@
 - Contains the list of installed dependencies and devDependencies.
 - Dev dependencies are excluded from bundler.
 - Contains version details of the packages in this format "major-version"."minor-version"."patch-version".
--
+
+## JSX
+
+- React is different and JSX is different.
+- React can work without JSX as well.
+- JSX helps writing react code.
+- React element is an object and JSX is a syntax. JSX looks like html but it is not html.
+- JSX is converted into react element or an object.
+- It is not a proper JavaScript, JS engine doesn't able to understand this. This is a job of bundler / parcel to make it understand to browser.
+- This code is transpiled before it reaches to browser.
+- Attributes are added in camel case in JSX.
+- Multi line JSX needed to be wrapped in round brackets ();
+- JSX sanitizes the data hence precenting the Cross Site Scripting attacks.
+- HTML, CSS and JavaScript can be written using JSX.
+
+### VS Code Extensions
+
+- Prettier
+- Bracket Pair Colorization.
+- Better Comments
+
+### Google Chrome Extensions
+
+- JSON Viewer
+
+## Components
+
+### Class Based Components
+
+- Old way of writing code.
+
+### Functional Components
+
+- New way of writing code.
+- It's just a JavaScript function which returns JSX.
+- Rendering a component inside a component is called component composition.
+- It is not mandatory to create a functional component by Arrow function, we can use normal function as well.
+- Function component can be called / rendered like these ways: <Component />, <Component></Component>, {Component()}
+- Passing props to a component is similar to passing arguments to a function.
+
+## App Planning
+
+- Header
+  - Logo
+  - Navigation Items
+- Body
+  - Search Bar
+  - Card Container
+    - Restaurant Cards
+- Footer
+
+## Styling a component
+
+- Inline CSS
+- Styled Component
+- Separate CSS file
+- Using a library like: TailWind, BootStrap

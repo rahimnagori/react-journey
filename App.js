@@ -1,12 +1,5 @@
-/*
-<div id="parent">
-    <div id="child">
-            <h1>I'm heading</h1>
-            <h1>I'm heading</h1>
-            <h1>I'm heading</h1>
-    </div>
-</div>
-*/
+import React from "react";
+import ReactDOM from "react-dom/client";
 
 const heading = React.createElement("h1", { id: "heading" }, "I'm heading");
 const childElement = React.createElement("div", { id: "child" }, [

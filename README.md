@@ -31,6 +31,11 @@
 
 - Hooks
 - 00:05 - Restructure files and cleanup.
+- 00:50 - Filtering the data.
+- 01:15 - Hooks
+- 01:45 - Reconciliation & React Fiber
+
+## EP-06 - Exploring the World
 
 # Questions
 
@@ -62,7 +67,7 @@
 - npx command is used to exectute a package.
 - React element is an object created using React.createElement(). When this element is rendered on DOM then it become HTML.
 - UI that changes based on data from API those UI is called 'Config Driven UI'.
--
+- React is very good and efficient in DOM manipulation hence makes the apps faster.
 
 ## npm init
 
@@ -135,25 +140,6 @@
 
 - JSON Viewer
 
-## Components
-
-### Class Based Components
-
-- Old way of writing code.
-
-### Functional Components
-
-- New way of writing code.
-- It's just a JavaScript function which returns JSX.
-- Rendering a component inside a component is called component composition.
-- It is not mandatory to create a functional component by Arrow function, we can use normal function as well.
-- Function component can be called / rendered like these ways: <Component />, <Component></Component>, {Component()}
-- Passing props to a component is similar to passing arguments to a function.
-
-## React Hooks
-
--
-
 ## App Planning
 
 - Header
@@ -171,3 +157,41 @@
 - Styled Component
 - Separate CSS file
 - Using a library like: TailWind, BootStrap
+
+## Components
+
+### Class Based Components
+
+- Old way of writing code.
+
+### Functional Components
+
+- New way of writing code.
+- It's just a JavaScript function which returns JSX.
+- Rendering a component inside a component is called component composition.
+- It is not mandatory to create a functional component by Arrow function, we can use normal function as well.
+- Function component can be called / rendered like these ways: <Component />, <Component></Component>, {Component()}
+- Passing props to a component is similar to passing arguments to a function.
+
+## React Hooks
+
+- Hooks are normal JavaScript functions that gives special power to our React application.
+- Some most important and common hooks are useState() and useEffect().
+- Hook should start with use keyword, it is not mandatory but expected.
+
+### useState()
+
+- It is used to maintain the local state of the component.
+- State can not be and shouldn't be directly updated.
+- Whenever a state variable updates / changes React re-render the component.
+
+## Virtual DOM
+
+- JavaScript representation of actual DOM is virtual DOM.
+- React creates a virtual DOM, a copy or representation of the actual DOM.
+- Virtual DOM comprises of React Elements / objects which is created using React.createElement().
+
+## Reconciliation Algorithm | React Fiber
+
+- On every user action or change in any state variable, React tries to find out the difference between old virtual DOM and new virtual DOM and if there is a change, actual DOM is updated.
+- This algorithm is known as React Fiber.

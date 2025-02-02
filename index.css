@@ -26,8 +26,16 @@
     background-color: lightgray;
 }
 
-.search {
+.filter {
     padding: 10px;
+}
+
+.filter-btn {
+    margin: 4px;
+    padding: 4px;
+    border: solid 1px black;
+    cursor: pointer;
+    border-radius: 5px;
 }
 
 .res-card:hover {

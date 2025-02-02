@@ -27,6 +27,11 @@
 - 00:03 - App overview
 - 00:05 - App planning
 
+## EP-05 - Let's get hooked
+
+- Hooks
+- 00:05 - Restructure files and cleanup.
+
 # Questions
 
 - What is CDN?
@@ -39,6 +44,7 @@
 - What is the difference between development and production files?
 - Git Vs GitHub Vs BitBucket?
 - npx vs npm
+- named export vs default export
 
 # Notes
 
@@ -143,6 +149,10 @@
 - It is not mandatory to create a functional component by Arrow function, we can use normal function as well.
 - Function component can be called / rendered like these ways: <Component />, <Component></Component>, {Component()}
 - Passing props to a component is similar to passing arguments to a function.
+
+## React Hooks
+
+-
 
 ## App Planning
 

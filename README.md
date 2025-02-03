@@ -37,6 +37,13 @@
 
 ## EP-06 - Exploring the World
 
+- 00:00 - Monolith & Microservice Architecture.
+- 00:21 - useEffect() Hook
+- 00:35 - CORS error
+- 00:52 - Shimmer UI
+- 01:09 - Header changes
+- 01:33 - Search functionality
+
 # Questions
 
 - What is CDN?
@@ -68,6 +75,7 @@
 - React element is an object created using React.createElement(). When this element is rendered on DOM then it become HTML.
 - UI that changes based on data from API those UI is called 'Config Driven UI'.
 - React is very good and efficient in DOM manipulation hence makes the apps faster.
+- Rendering element based on condition is called conditional rendering.
 
 ## npm init
 
@@ -139,6 +147,7 @@
 ### Google Chrome Extensions
 
 - JSON Viewer
+- Allow CORS: Access-Control-Allow-Origin
 
 ## App Planning
 
@@ -185,6 +194,13 @@
 - State can not be and shouldn't be directly updated.
 - Whenever a state variable updates / changes React re-render the component.
 
+### useEffect()
+
+- A normal JS function with some specific use.
+- It consist of a callback function and a dependency array.
+- It is idea for initial API call to load the data.
+- Code inside useEffect is executed after the component renders.
+
 ## Virtual DOM
 
 - JavaScript representation of actual DOM is virtual DOM.
@@ -195,3 +211,25 @@
 
 - On every user action or change in any state variable, React tries to find out the difference between old virtual DOM and new virtual DOM and if there is a change, actual DOM is updated.
 - This algorithm is known as React Fiber.
+
+## Monolith Architecture
+
+- A single project consist of: API, UI, Auth, DB etc.
+- A single change in the project require a complete build and deployment of the whole project.
+
+## Microservices Architecture
+
+- Different service for different job like: BackEnd, UI, Auth, DB etc. forms a microservices architecture.
+- Consist of different service for different operation / task.
+- This is called separation of concerns and it follows single responsibility principle.
+- With Microservices architecture, teams can work independently.
+- All these services talk to each other.
+- Every microservice can have their own programming language.
+- All the service can run on different port.
+
+## Two ways to make an API call.
+
+- Page loading -> API call (take some time 500ms) -> API Response -> Render the page.
+- Page loading -> Render the Page -> API call -> API response -> Re-render the page.
+- Second approach is a better approach and gives a better UX.
+- In first approach, page seems frozen for some time.

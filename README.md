@@ -44,6 +44,17 @@
 - 01:09 - Header changes
 - 01:33 - Search functionality
 
+## EP-07 - Finding the path
+
+- 00:02 - useEffect() & useState() dive deep.
+- 00:16 - Creating routes and using library react-router.
+- 00:43 - Children routes.
+- 00:50 - Outlet to render children.
+- 00:55 - Links - Change route w/o reload.
+- 01:05 - Types of routing - Client side routing and server side routing.
+- 01:10 - Dynamic Routing - Restaurant details page.
+- 01:40 - GraphQL overview.
+
 # Questions
 
 - What is CDN?
@@ -76,6 +87,8 @@
 - UI that changes based on data from API those UI is called 'Config Driven UI'.
 - React is very good and efficient in DOM manipulation hence makes the apps faster.
 - Rendering element based on condition is called conditional rendering.
+- In single page application, page doesn't change, it's a same page but components keeps changing based on the route using a component called <Link>.
+- Hence Single Page Application are faster.
 
 ## npm init
 
@@ -187,19 +200,35 @@
 - Hooks are normal JavaScript functions that gives special power to our React application.
 - Some most important and common hooks are useState() and useEffect().
 - Hook should start with use keyword, it is not mandatory but expected.
+- It is good to call hooks on top of the component.
 
 ### useState()
 
 - It is used to maintain the local state of the component.
 - State can not be and shouldn't be directly updated.
 - Whenever a state variable updates / changes React re-render the component.
+- Always use inside the component.
+- Create state variables on top of the component.
+- Don't create state variables inside some scopes like (loop, if condition etc.);
 
 ### useEffect()
 
 - A normal JS function with some specific use.
 - It consist of a callback function and a dependency array.
 - It is idea for initial API call to load the data.
-- Code inside useEffect is executed after the component renders.
+- Code inside useEffect is executed everytime after the component renders.
+- If there is no dependency array, useEffect() will be called on every time component renders.
+  useEffect(() => {
+  console.log('Called everytime component renders');
+  });
+- If there is an empty dependency array, useEffect() will be called only first time the component renders.
+  useEffect(() => {
+  console.log('Called only first time the component renders');
+  }, []);
+- If there are some dependency in the dependency array, useEffect() will be called whenever the value of the dependency changes.
+  useEffect(() => {
+  console.log('Called first time and whenever xyz changes');
+  }, [xyz]);
 
 ## Virtual DOM
 
@@ -233,3 +262,67 @@
 - Page loading -> Render the Page -> API call -> API response -> Re-render the page.
 - Second approach is a better approach and gives a better UX.
 - In first approach, page seems frozen for some time.
+
+## Routing
+
+- Routing is of two types: Client side routing and Server side routing.
+
+### CSR
+
+- All the files and routes are loaded on initial load.
+- Application has all the components and we just changing them.
+
+## SSR
+
+- Every route does a network call and loads a page from server.
+
+## Installing react-router-dom
+
+- Install the package.
+
+```bash
+npm i react-router
+```
+
+- Create a browser route.
+
+```bash
+import { createBrowserRouter } from "react-router";
+const appRouter = createBrowserRouter([
+  {
+    path: "/",
+    element: <AppLayout />,
+    errorElement: <Error />,
+  },
+  {
+    path: "/about",
+    element: <About />,
+  },
+  {
+    path: "/contact",
+    element: <Contact />,
+  },
+]);
+
+const root = ReactDOM.createRoot(document.getElementById("root"));
+
+root.render(<RouterProvider router={appRouter} />);
+```
+
+- useRouterError can be used to extract more information related to the path error.
+- <Outlet /> is used to render children in a component.
+- <Outlet /> component is replaced with the children element based on route.
+
+## Link Component
+
+- Website will not reload hence improving the performance.
+
+```bash
+import { Link } from "react-router";
+<Link to="/">Home</Link>
+```
+
+## GraphQL
+
+- It deals with under fetching and over fetching of the data.
+- Load data only which you need.

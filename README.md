@@ -67,6 +67,8 @@
 - 00:33 - Custom hook to check user's online / offline status.
 - 01:05 - Breaking the application into smaller chunks.
 
+## EP-10 - Jo dikhta hai wo bikta hai
+
 # Questions
 
 - What is CDN?
@@ -448,3 +450,34 @@ import { Link } from "react-router";
 - When we go to a page / component that is lazy loaded, React tries to load it real quick but that time, the component was not available so React suspends the render process and we see an error on UI.
   - To fix this error, we have to use a component called `Suspense` provided by React.
   - This <Suspence> component has s fallback prop, so until the component is not available React will render whatever in it fallback. fallback can have a component or JSX.
+
+```bash
+import React, { lazy, Suspense } from "react";
+const Grocery = lazy(() => import("./components/Grocery"));
+
+const appRouter = createBrowserRouter([
+  {
+    path: "/",
+    element: <AppLayout />,
+    children: [
+      {
+        path: "/",
+        element: <Body />,
+      },
+      {
+        path: "/grocery",
+        element: (
+          <Suspense fallback={<h3>Loading.....</h3>}>
+            <Grocery />
+          </Suspense>
+        ),
+      },
+    ],
+    errorElement: <Error />,
+  },
+]);
+
+const root = ReactDOM.createRoot(document.getElementById("root"));
+
+root.render(<RouterProvider router={appRouter} />);
+```

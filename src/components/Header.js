@@ -1,7 +1,9 @@
 import { Link } from "react-router";
 import { LOGO_URL } from "../utils/constants";
+import useOnlineStatus from "../utils/useOnlineStatus";
 
 const Header = () => {
+  const onlineStatus = useOnlineStatus();
   return (
     <div className="header">
       <div>
@@ -19,6 +21,14 @@ const Header = () => {
             <Link to="/contact">Contact Us</Link>
           </li>
           <li>Cart</li>
+          <li>
+            <Link to="/grocery">Grocery</Link>
+          </li>
+          <li>
+            <span
+              class={`user-status ${onlineStatus ? "online" : "offline"}`}
+            ></span>
+          </li>
         </ul>
       </div>
     </div>

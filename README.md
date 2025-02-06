@@ -60,6 +60,13 @@
 - 00:49 - Component lifecycle
 - 01:09 - Calling an API
 
+## EP-09 - Optimizing our App
+
+- 00:00 - Single responsibility principle.
+- 00:08 - Custom hooks.
+- 00:33 - Custom hook to check user's online / offline status.
+- 01:05 - Breaking the application into smaller chunks.
+
 # Questions
 
 - What is CDN?
@@ -95,6 +102,8 @@
 - Rendering element based on condition is called conditional rendering.
 - In single page application, page doesn't change, it's a same page but components keeps changing based on the route using a component called <Link>.
 - Hence Single Page Application are faster.
+- Following techniques are used to do performance improvements:
+  - Lazy loading or chunking
 
 ## npm init
 
@@ -227,7 +236,7 @@ class Component extends React.Component{
   - Parent Constructor -> Parent Render
   - Child Contructor -> Child Render -> Child componentDidMount
   - Parent componentDidMount
-- Lifecycle of a classes component having parent and two child components.
+- Lifecycle of a class based component having parent and two child components.
 
 ```bash
 <Parent>
@@ -419,3 +428,23 @@ import { Link } from "react-router";
 
 - It deals with under fetching and over fetching of the data.
 - Load data only which you need.
+
+## Single responsibility principle
+
+- Every function / component should have a single responsibility.
+- Break down your code into small pieces / modules. This makes the code testable and maintainable.
+- Code becomes resuable, testable and maintainable.
+
+## Custom hooks
+
+- Hooks are like utility functions.
+- Hook should always start with 'use' keyword. This is recommended.
+
+## Lazy loading - Chunking - Code splitting - Dynamic Bundling
+
+- Lazy loading or also called on demand loading.
+- When the bundle size is increased it is also called bloating.
+- We can create different bundle for different part of the application to improve performance of the application.
+- When we go to a page / component that is lazy loaded, React tries to load it real quick but that time, the component was not available so React suspends the render process and we see an error on UI.
+  - To fix this error, we have to use a component called `Suspense` provided by React.
+  - This <Suspence> component has s fallback prop, so until the component is not available React will render whatever in it fallback. fallback can have a component or JSX.

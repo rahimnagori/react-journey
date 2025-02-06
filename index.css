@@ -66,3 +66,18 @@
     margin: 5px;
     padding: 5px;
 }
+
+.user-status {
+    display: inline-block;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+}
+
+.online {
+    background-color: green;
+}
+
+.offline {
+    background-color: red;
+}

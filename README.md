@@ -55,6 +55,11 @@
 - 01:10 - Dynamic Routing - Restaurant details page.
 - 01:40 - GraphQL overview.
 
+## EP-08 - Let's get classy
+
+- 00:49 - Component lifecycle
+- 01:09 - Calling an API
+
 # Questions
 
 - What is CDN?
@@ -68,6 +73,7 @@
 - Git Vs GitHub Vs BitBucket?
 - npx vs npm
 - named export vs default export
+- Why we write super(props) in class based component?
 
 # Notes
 
@@ -185,6 +191,93 @@
 ### Class Based Components
 
 - Old way of writing code.
+- A class based component is a class which has a render method that returns a JSX.
+
+```bash
+class Component extends React.Component{
+  constructor(props){
+    super(props);
+  }
+
+  render() {
+    return (
+      <div>Hello from Class Component!</div>
+    )
+  }
+}
+```
+
+- There is no different in importing / exporting a functional and class component.
+- Passing the props in both type of component is similar.
+- We receive the props in the constructor and we have to do super(props) in the constructor.
+
+```bash
+  constructor(props){
+    super(props);
+  }
+```
+
+- props can be accessed using this.props and state can be used using this.state.
+- To initialize this.props, super(props) is called in the constructor.
+- Constructor is best place to receive props and create state variables.
+- In class based component, state object can contain all the state variables.
+- When the component is mounted successfully, componentDidMount will be called.
+- In functional component, we make an API call in useEffect(). useEffect() is called after the component renders similarly in class based component componentDidMount is used to make API call because is it called when component is rendered.
+- Lifecycle of a class based component:
+  - Parent Constructor -> Parent Render
+  - Child Contructor -> Child Render -> Child componentDidMount
+  - Parent componentDidMount
+- Lifecycle of a classes component having parent and two child components.
+
+```bash
+<Parent>
+  <Child 1 />
+  <Child 2 />
+</Parent>
+```
+
+- Lifecycle will be like this:
+  - Parent Constructor -> Parent Render
+  - Child 1 Constructor -> Child 1 Render.
+  - Child 2 Constructor -> Child 2 Render.
+  - Child 1 Component Did Mount.
+  - Child 2 Component Did Mount.
+  - Parent ComponentDidMount
+- Refer the lifecycle diagram here: https://projects.wojtekmaj.pl/react-lifecycle-methods-diagram/
+
+- React has two phases: render & commit phase.
+- So first the constructor is called then render is called then the react updates the DOM.
+- ComponentWillUnmount: It is called just before the component is ready to disappear from UI.
+  - When we change the page, there are lots of things that we need to clear.
+  - Try adding a setInterval() inside componentDidMount and if we change the page / state / component this setInterval() keeps on leading.
+  - It'll be a huge loss of performance hence componentWillUnmount() comes into picture. Here this setInterval needs to be cleaned on page leave otherwise huge loss of performance.
+- In class components cleanup happens in componentWillUnmount() and in functional components this happens in the return method of useEffect().
+- useEffect and lifecycle methods are different but we can mimic lifecycle methods in useEffect.
+  - componentDidMount: Called only once when the component renders.
+
+```bash
+useEffect( () => {
+  console.log('Only called once after the component renders');
+}, []);
+```
+
+- componentDidUpdate: Called everytime component re-renders.
+
+```bash
+useEffect( () => {
+  console.log("Called everytime xyz changes");
+}, [xyz])
+```
+
+- componentWillUnmount: Called when the component is about to disappear from view.
+
+```bash
+useEffect( () => {
+  return () => {
+    console.log("Called whenever component is removed from the view.");
+  }
+})
+```
 
 ### Functional Components
 
@@ -276,7 +369,7 @@
 
 - Every route does a network call and loads a page from server.
 
-## Installing react-router-dom
+## Installing react-router
 
 - Install the package.
 

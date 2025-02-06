@@ -69,6 +69,8 @@
 
 ## EP-10 - Jo dikhta hai wo bikta hai
 
+- 00:00 - Start using CSS
+
 # Questions
 
 - What is CDN?
@@ -83,6 +85,7 @@
 - npx vs npm
 - named export vs default export
 - Why we write super(props) in class based component?
+- SASS vs SCSS.
 
 # Notes
 
@@ -105,7 +108,12 @@
 - In single page application, page doesn't change, it's a same page but components keeps changing based on the route using a component called <Link>.
 - Hence Single Page Application are faster.
 - Following techniques are used to do performance improvements:
-  - Lazy loading or chunking
+  - Lazy loading or chunking.
+- Options to add style in the project:
+  - index.css file.
+  - SASS and SCSS.
+  - Styled components.
+  - Using libraries or CSS frameworks: Material UI, Tailwind CSS, Chakra UI, Bootstrap, Ant Design etc.
 
 ## npm init
 
@@ -481,3 +489,31 @@ const root = ReactDOM.createRoot(document.getElementById("root"));
 
 root.render(<RouterProvider router={appRouter} />);
 ```
+
+## TailWind CSS
+
+- Tailwind provides already created CSS to style our application similar to bootstrap.
+- To configure Tailwind, install it, configure it and you are ready to go.
+
+```bash
+npm install tailwindcss @tailwindcss/postcss
+```
+
+- Configure PostCSS. Create a .postcssrc file in your project root, and enable the @tailwindcss/postcss plugin.
+
+```bash
+{
+  "plugins": {
+    "@tailwindcss/postcss": {}
+  }
+}
+```
+
+- Import Tailwind CSS. Create a ./src/index.css file and add an @import for Tailwind CSS.
+
+```bash
+@import "tailwindcss";
+```
+
+- Tailwind is very light weight.
+- When parcel bundles it, only the classes which are used in the application, are imported and added in the bundle. Makes the application faster.

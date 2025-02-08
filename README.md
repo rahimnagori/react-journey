@@ -74,7 +74,10 @@
 ## EP-11 - Data is the new oil
 
 - 00:00 - Higher order component.
-- 00:22 - Controlled and uncontrolled application.
+- 01:45 - Controlled and uncontrolled application.
+- 02:00 - Lifting the props up or passing to parent
+- 02:08 - Props drilling
+- 02:14 - React context
 
 # Questions
 
@@ -91,6 +94,7 @@
 - named export vs default export
 - Why we write super(props) in class based component?
 - SASS vs SCSS.
+- Can we wrap a component with two different providers?
 
 # Notes
 
@@ -528,3 +532,69 @@ npm install tailwindcss @tailwindcss/postcss
 - Takes a component, enhances the component and returns a component.
 
 ## Controlled and uncontrolled component
+
+- A component tha is controlled by another component (maybe it's parent), is called a controlled component.
+- A self managing component is called uncontrolled component.
+
+### Props drilling
+
+- In React data flows from parent to children.
+- Consider the below component structure:
+  - A
+  - B -> has some data
+    - x
+    - y
+      - p
+      - q -> need that data.
+      - r
+    - z
+  - C
+- So consider if B component has some data and q component needs that data, so we can't directly pass that data from B to q. The data has to flow from parent to child like: B -> y -> q. y component doesn't need this data but it has to be passed via y. This concept is known as props drilling.
+
+## React context
+
+- Suppose a deep nested level structure of component, where passing the data using props drilling will be a nightmare.
+- To avoid props drilling in such structure, react context is helpful.
+- Data can be used anywhere using react context.
+- Using react context, data can be stored centrally to a location and can be utilised anywhere.
+
+```bash
+import { createContext } from "react";
+
+const UserContext = createContext({
+  loggedInUser: "",
+});
+
+export default UserContext;
+```
+
+- And to access this data
+
+```bash
+import { useContext } from "react";
+import UserContext from "../utils/UserContext";
+
+  const onlineStatus = useOnlineStatus();
+  const data = useContext(UserContext);
+```
+
+- Use smartly when to use props, state, context or a combination of either.
+- To use context in class based component. Use it like a component called consumer.
+
+```bash
+import UserContext from "../utils/UserContext";
+
+<UserContext.Consumer>
+  {({ loggedInUser }) => <h3 className="text-lg">{loggedInUser}</h3>}
+</UserContext.Consumer>
+```
+
+- To update the value inside the context, we use Provider from "react".
+- And then wrap the app with Provider component. <Provider> can be wrapped with a section of <App> like <Header> or just <Body> component.
+
+```bash
+import UserContext from "./path-to-user-context";
+<UserContext.Provider value={{ loggedInUser: userName }} >
+  <App />
+</UserContext.Provider>
+```

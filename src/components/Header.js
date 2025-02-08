@@ -1,9 +1,13 @@
 import { Link } from "react-router";
 import { LOGO_URL } from "../utils/constants";
 import useOnlineStatus from "../utils/useOnlineStatus";
+import { useContext } from "react";
+import UserContext from "../utils/UserContext";
 
 const Header = () => {
   const onlineStatus = useOnlineStatus();
+  const { loggedInUser } = useContext(UserContext);
+
   return (
     <div className="flex justify-between bg-pink-100 shadow-lg">
       <div>
@@ -25,7 +29,7 @@ const Header = () => {
             <Link to="/grocery">Grocery</Link>
           </li>
           <li className="px-4">
-            {onlineStatus ? "Online" : "Offline"}
+            {loggedInUser}
             <span
               className={`inline-block w-[15px] h-[15px] rounded-2xl mx-1 ${
                 onlineStatus ? "bg-green-600" : "bg-red-600"

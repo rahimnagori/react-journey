@@ -69,12 +69,12 @@ const Body = () => {
             Top Rated Restaurants
           </button>
         </div>
-        <div className="search m-4 p-4 flex item-center">
+        <div className="search m-4 p-4 items-center">
           <label>User name : </label>
           <input
             value={loggedInUser}
             onChange={(e) => setUserName(e.target.value)}
-            className="border border-black p-2"
+            className="border border-solid border-black px-2 m-4"
           />
         </div>
       </div>

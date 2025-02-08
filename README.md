@@ -29,7 +29,6 @@
 
 ## EP-05 - Let's get hooked
 
-- Hooks
 - 00:05 - Restructure files and cleanup.
 - 00:50 - Filtering the data.
 - 01:15 - Hooks
@@ -79,6 +78,15 @@
 - 02:08 - Props drilling
 - 02:14 - React context
 
+## EP-12 - Let's build our store
+
+- 00:00 - Redux is not mandatory.
+- 00:17 - RTK architecture.
+- 00:30 - Redux flow.
+- 00:40 - RTK Setup.
+- 01:37 - Create Cart.
+- 01:50 - Interview tips.
+
 # Questions
 
 - What is CDN?
@@ -118,6 +126,7 @@
 - Hence Single Page Application are faster.
 - Following techniques are used to do performance improvements:
   - Lazy loading or chunking.
+  - While using Redux, subscribe to the most needed store / slice.
 - Options to add style in the project:
   - index.css file.
   - SASS and SCSS.
@@ -195,6 +204,7 @@
 
 - JSON Viewer
 - Allow CORS: Access-Control-Allow-Origin
+- React Dev Tools
 
 ## App Planning
 
@@ -597,4 +607,140 @@ import UserContext from "./path-to-user-context";
 <UserContext.Provider value={{ loggedInUser: userName }} >
   <App />
 </UserContext.Provider>
+```
+
+## React Redux & Redux Toolkit (RTK)
+
+- Redux is a state management library.
+- It is compatible with many JS libraries but mostly used with React.
+  - Redux is not mandatory. It is a third party library, and doesn't come with React.
+  - For small and sometimes mid size application, Redux may not needed at all.
+  - Use case of Redux is some very big or enterprise level application where there are lot of components.
+  - Zustand is also one such library to manage state apart from Redux.
+- Redux toolkit is a less complicated version.
+- Subscribe to the most desired section of the store / slice for performance improvement.
+- If we subscribe to the parent slice, instead of a portion, so whenever anything in parent changes, subscribed component is automatically updated, hence loss of performance.
+- In vanilla or older version of Redux mutating the state was prohibited but it is not in this new version.
+  - According to new version of Redux we now have to either mutate the state or return the updated state.
+
+```bash
+  state.items.length = 0; // either mutate the current state. Return is not required.
+  return { items: [] }; // or return the new updated state.
+```
+
+- React behind the scene does the all old process anyways.
+- immer is a library that takes care of this operation
+- It is not possible to console.log in an action of a slice. To see the data:
+
+```bash
+    import { current } = from "@reduxjs/toolkit";
+    addItem: (state, action) => {
+      console.log(current(state));
+    }
+```
+
+### Architecture of RTK
+
+- It can be assumed as a very big object, kept in a central place.
+- Redux store can have multiple slices (part of object).
+- We create slices to do the logical separation of data. Like user slice, cart slice etc.
+- We can't update a slice directly.
+- Redux data update flow:
+  - An event (button click, key press) occures.
+  - An action is dispatched.
+  - This action calls a function. This function is call Reducer function.
+  - This function then updates the redux store (slice).
+- Redux read data flow:
+  - Selector is used to read data from store / slice.
+  - React components subscribes to the store / slice using selector so whenever data inside slice changes, data in react component is updated automatically.
+
+### RTK Setup
+
+- Install @reduxjs/toolkit and react-redux.
+- Build our store.
+
+```bash
+// appStore.js
+import { configureStore } from "@reduxjs/toolkit";
+import cartReducer
+import userReducer
+
+const appStore = configureStore({
+  // add slices like cart and user to main reducer here
+  reducer: {
+    cart: cartReducer,
+    user: userReducer
+  }
+});
+export default appStore;
+```
+
+- Connect our store to our app.
+
+```bash
+// index.js
+import { Provider } from "react-redux";
+import appStore from "./appStore";
+
+<Provider store={appStore}>
+  <App />
+</Provider>
+```
+
+- Create a slice.
+
+```bash
+// cartSlice.js
+import { createSlice } from "@reduxjs/toolkit";
+const cartSlice = createSlice({
+  name: "cart", //name of the slice
+  initialState: {
+    items: []
+  },
+  reducers: {
+    // reducer functions corresponding to different actions to modify the slice of the store.
+    addItem: (state, action) => {
+      // state is the initial state
+      state.items.push(action.payload);
+    },
+    removeItem: (state) => {
+      state.items.pop();
+    },
+    clearCart: () => {
+      state.items.length = 0;
+    }
+  }
+});
+
+export const { addItem, removeItem, clearCart } = cartSlice.actions;
+
+export default cartSlice.reducer;
+```
+
+- Selector
+  - Selector is a hook in React.
+  - useSelector() from react-redux library.
+
+```bash
+// component.js
+import { useSelector } from "react-redux";
+
+const cartItems = useSelector( (store) => store.cart.items);
+
+<h1>Cart ( {cartItems.length} items)</h1>
+
+```
+
+- dispatch (action).
+
+```bash
+// component.js
+
+import { useDispatch } from "react-redux";
+import {addItem} from "./cartSlice";
+const dispatch = useDispatch();
+
+const handleClick = () => {
+  dispatch(addItem("pizza"));
+}
 ```

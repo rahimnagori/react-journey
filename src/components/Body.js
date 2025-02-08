@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import RestaurantCard from "./RestaurantCard";
+import RestaurantCard, { withPromotedLabel } from "./RestaurantCard";
 import Shimmer from "./Shimmer";
 import { API_URL } from "../utils/constants";
 import { Link } from "react-router";
@@ -8,6 +8,7 @@ const Body = () => {
   const [restaurantList, setRestaurantList] = useState([]);
   const [restData, setRestData] = useState([]);
   const [searchText, setSearchText] = useState("");
+  const RestaurantCardPromoted = withPromotedLabel(RestaurantCard);
 
   useEffect(() => {
     fetchData();
@@ -21,6 +22,7 @@ const Body = () => {
         ?.restaurants;
     setRestaurantList(result);
     setRestData(result);
+    console.log("restaurants", result);
   };
 
   const handleClick = () => {
@@ -29,8 +31,6 @@ const Body = () => {
     );
     setRestData(filteredRestaurant);
   };
-
-  console.log(restaurantList);
 
   const handleSearch = () => {
     const filteredRestaurant = restaurantList.filter((restaurant) => {
@@ -72,13 +72,17 @@ const Body = () => {
         <Shimmer />
       ) : (
         <div className="flex flex-wrap rounded-lg">
-          {restData.map((restaurant) => (
+          {restData.map((restaurant, index) => (
             <Link
               to={"/restaurant/" + restaurant.info.id}
               className=""
               key={restaurant.info.id}
             >
-              <RestaurantCard resData={restaurant.info} className="" />
+              {index % 2 === 0 ? (
+                <RestaurantCardPromoted resData={restaurant.info} />
+              ) : (
+                <RestaurantCard resData={restaurant.info} />
+              )}
             </Link>
           ))}
         </div>

@@ -71,6 +71,11 @@
 
 - 00:00 - Start using CSS
 
+## EP-11 - Data is the new oil
+
+- 00:00 - Higher order component.
+- 00:22 - Controlled and uncontrolled application.
+
 # Questions
 
 - What is CDN?
@@ -517,3 +522,9 @@ npm install tailwindcss @tailwindcss/postcss
 
 - Tailwind is very light weight.
 - When parcel bundles it, only the classes which are used in the application, are imported and added in the bundle. Makes the application faster.
+
+## Higher order component
+
+- Takes a component, enhances the component and returns a component.
+
+## Controlled and uncontrolled component

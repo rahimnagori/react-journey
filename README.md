@@ -86,6 +86,13 @@
 - 00:40 - RTK Setup.
 - 01:37 - Create Cart.
 - 01:50 - Interview tips.
+- 02:35 - RTK Queries
+
+## EP-13 - Time for test
+
+- 00:02 - Everything about testing.
+- 00:17 - Setup testing.
+- 00:52 - Write first test.
 
 # Questions
 
@@ -103,6 +110,7 @@
 - Why we write super(props) in class based component?
 - SASS vs SCSS.
 - Can we wrap a component with two different providers?
+- RTK Queries.
 
 # Notes
 
@@ -199,6 +207,7 @@
 - Prettier
 - Bracket Pair Colorization.
 - Better Comments
+- vscode-icons
 
 ### Google Chrome Extensions
 
@@ -743,4 +752,64 @@ const dispatch = useDispatch();
 const handleClick = () => {
   dispatch(addItem("pizza"));
 }
+```
+
+## Testing
+
+- A single line of change can introduce bugs into our application, hence testing is required.
+- Manual testing - Manually testing each and every part of code. It is not feasible.
+- Types of testing (developer).
+  - Unit testing: Testing React component is isolation.
+  - Integration testing: Communication of components interacting with each other.
+  - End to end (e2e) testing: User lands on webpage and up to leaving the application. A complete e2e flow. Require tools like Cyprus or Selenium.
+
+### Testing Setup
+
+- Install react-testing-library. RTL uses JEST behind the scene and JEST uses babel.
+- We don't need to setup the testing on production, hence -D flag.
+- Install dependency additional dependencies with babel.
+
+```bash
+npm i -D @testing-library/react
+npm i -D jest
+npm install --save-dev babel-jest @babel/core @babel/preset-env
+```
+
+- Configure babel.
+
+```bash
+// babel.config.js
+module.exports = {
+  [ ["@babel/present-env", { targets: {node: current }}]]
+};
+```
+
+- Configure parcel to disable babel transpilation.
+- Jest configuration.
+
+```bash
+npx jest --init
+```
+
+- Install jsdom library.
+
+```bash
+npm i -D jest-environment-jsdom
+```
+
+- To create a test file, possible options are:
+  - Create a folder called `__test__` .
+  - Create file with extension .spec.js or .test.js
+- this double underscore (\_\_) is called dunder.
+- To make JSX work inside the test file, we need to install @babel/preset-react library.
+- Add the configuration in babel config.
+- Install another library @testing-library/jest-dom
+
+```bash
+npm i -D @babel/preset-react
+
+//babel.config.js
+[("@babel/preset-react", { runtime: "automatic" })]
+
+npm i -D @testing-library/jest-dom
 ```

@@ -40,6 +40,9 @@ const Header = () => {
               }`}
             ></span>
           </li>
+          <li className="px-4 hover:text-white hover:border-2">
+            <button className="cursor-pointer">Login</button>
+          </li>
         </ul>
       </div>
     </div>

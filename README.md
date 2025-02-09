@@ -93,6 +93,8 @@
 - 00:02 - Everything about testing.
 - 00:17 - Setup testing.
 - 00:52 - Write first test.
+- 01:55 - Grouping test cases.
+- 02:04 - Dive deep into advanced unit testing.
 
 # Questions
 
@@ -812,4 +814,75 @@ npm i -D @babel/preset-react
 [("@babel/preset-react", { runtime: "automatic" })]
 
 npm i -D @testing-library/jest-dom
+```
+
+### Let's test
+
+- using getByRole, for single element. getAllByRole for multiple element. Possible roles:
+  - button
+  - heading
+  - textbox
+- using getByText
+
+```bash
+import { render, screen } from "@testing-library/react";
+import "@testing-library/jest-dom";
+import Contact from "../Contact";
+
+Contact;
+test("Should load contact us component", () => {
+  render(<Contact />);
+
+  const heading = screen.getByRole("heading");
+
+  expect(heading).toBeInTheDocument();
+});
+
+```
+
+- Test cases can be grouped usin describe().
+- Instead of test(), you can use it() as well. There is no difference in either.
+
+```bash
+describe("Something to test", () => {
+  test("test something", () => {})
+
+  test("another test", () => {})
+
+  it("should do something", () => {})
+})
+```
+
+### Advanced testing.
+
+- If try to test Header component like this, it fails because header component is using redux and Link component from react-router-dom.
+
+```bash
+import { render } from "@testing-library/react";
+import Header from "../Header";
+
+it("Should load header component with login button", () => {
+  render(<Header />);
+});
+```
+
+- We have to provide redux and browser router to the test.
+
+```bash
+import { render } from "@testing-library/react";
+import { Provider } from "react-redux";
+import { BrowserRouter } from "react-router";
+import Header from "../Header";
+import appStore from "../../store/appStore";
+
+it("Should load header component with login button", () => {
+  render(
+    <BrowserRouter>
+      <Provider store={appStore}>
+        <Header />
+      </Provider>
+    </BrowserRouter>
+  );
+});
+
 ```

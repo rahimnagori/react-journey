@@ -95,6 +95,8 @@
 - 00:52 - Write first test.
 - 01:55 - Grouping test cases.
 - 02:04 - Dive deep into advanced unit testing.
+- 02:42 - Integration testing.
+- 03:05 - Important tests
 
 # Questions
 
@@ -885,4 +887,50 @@ it("Should load header component with login button", () => {
   );
 });
 
+```
+
+### Integration testing
+
+- We'll be testing search functionality of Body component.
+- Here, following things can be tested:
+  - An API call.
+  - Typing something on search bar will update the items.
+  - Component interacting with other components.
+- Rendering body component will fail, because
+  - we are using `fetch` in it.
+  - Since fetch is a browser API and we are not actually rendering the component using browser. - We are mimicking the DOM.
+  - So we need to mimic the `fetch` as well.
+- We create our own fetch function.
+
+```bash
+  global.fetch = jest.fn( () => {
+    return Promise.resolve({
+      json: () => {
+        return Promise.resolve(data);
+      }
+    })
+  });
+```
+
+- Some important methods
+
+```bash
+  describe("Some test", () => {
+    beforeAll( () => {
+      // if you wanted to something before starting any test case.
+    })
+
+    beforeEach( () => {
+      // this will run before each test case.
+    })
+
+    afterAll( () => {
+      // run only once, after all the test cases finishes
+    });
+
+    afterEach( () => {
+      // run after every test case execution.
+    })
+
+  })
 ```

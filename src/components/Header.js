@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { Link } from "react-router";
 import { useSelector } from "react-redux";
 import { LOGO_URL } from "../utils/constants";
@@ -6,9 +6,14 @@ import useOnlineStatus from "../utils/useOnlineStatus";
 import UserContext from "../utils/UserContext";
 
 const Header = () => {
+  const [buttonName, setButtonName] = useState("Login");
   const onlineStatus = useOnlineStatus();
   const { loggedInUser } = useContext(UserContext);
   const cartItems = useSelector((store) => store.cart.items);
+
+  const handleClick = () => {
+    buttonName === "Login" ? setButtonName("Logout") : setButtonName("Login");
+  };
 
   return (
     <div className="flex justify-between bg-pink-100 shadow-lg">
@@ -41,7 +46,9 @@ const Header = () => {
             ></span>
           </li>
           <li className="px-4 hover:text-white hover:border-2">
-            <button className="cursor-pointer">Login</button>
+            <button className="cursor-pointer" onClick={handleClick}>
+              {buttonName}
+            </button>
           </li>
         </ul>
       </div>

@@ -115,6 +115,10 @@
 - SASS vs SCSS.
 - Can we wrap a component with two different providers?
 - RTK Queries.
+- Basic questions
+  - Why do we use Doctype in HTML?
+  - use of <head> tag?
+  - use of defer & async in script tag.
 
 # Notes
 
@@ -757,6 +761,12 @@ const handleClick = () => {
   dispatch(addItem("pizza"));
 }
 ```
+
+## Redux middleware - Thunk & Saga
+
+### Redux Thunk
+
+### Redux Saga
 
 ## Testing
 

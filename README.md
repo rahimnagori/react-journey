@@ -538,11 +538,10 @@ npm install tailwindcss @tailwindcss/postcss
 - Configure PostCSS. Create a .postcssrc file in your project root, and enable the @tailwindcss/postcss plugin.
 
 ```bash
-{
-  "plugins": {
-    "@tailwindcss/postcss": {}
+  {
+    "plugins": {
+      "@tailwindcss/postcss": {}
   }
-}
 ```
 
 - Import Tailwind CSS. Create a ./src/index.css file and add an @import for Tailwind CSS.
